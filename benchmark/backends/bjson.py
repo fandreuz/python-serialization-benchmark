@@ -11,7 +11,7 @@ from benchmark.cases import NumericArrayObject, TextObject
 class JsonBackend(Backend[str]):
     @classmethod
     def serialize(cls, obj: TextObject | NumericArrayObject) -> str:
-        return dumps(asdict(obj))
+        return dumps(asdict(obj), default=str)
 
     @classmethod
     def deserialize(
