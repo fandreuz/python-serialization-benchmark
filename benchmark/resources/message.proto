@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+import "google/protobuf/timestamp.proto";
+
+message NumPyMsg {
+    bytes array = 1;
+    string dtype = 2;
+}
+
+message InformationMsg {
+    string name = 1;
+    string description = 2;
+    int64 id = 3;
+    string author = 4;
+    google.protobuf.Timestamp generated_at = 5;
+}
+
+message NumericArrayObjectMsg {
+    InformationMsg information = 1;
+
+    NumPyMsg x = 2;
+    NumPyMsg y = 3;
+    NumPyMsg z = 4;
+    NumPyMsg values = 5;
+}
+
+message TextObjectMsg {
+    InformationMsg information = 1;
+
+    string abstract = 2;
+    string text = 3;
+    string appendix = 4;
+}

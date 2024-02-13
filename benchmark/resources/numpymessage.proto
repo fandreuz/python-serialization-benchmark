@@ -1,4 +1,0 @@
-message NumPyMessage {
-    bytes array = 1;
-    string dtype = 2;
-}
