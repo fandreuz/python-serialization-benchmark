@@ -3,7 +3,6 @@ from __future__ import annotations
 from pickle import dumps, loads
 from typing import Type
 
-
 from benchmark.base import Backend
 from benchmark.cases import NumericArrayObject, TextObject
 
