@@ -1,0 +1,90 @@
+[
+  {
+    "namespace": "python.serialization.benchmark",
+    "type": "record",
+    "name": "NumPyMsg",
+    "fields": [
+      {
+        "name": "dtype",
+        "type": "string"
+      },
+      {
+        "name": "array",
+        "type": "bytes"
+      }
+    ]
+  },
+  {
+    "namespace": "python.serialization.benchmark",
+    "type": "record",
+    "name": "InformationMsg",
+    "fields": [
+      {
+        "name": "name",
+        "type": "string"
+      },
+      {
+        "name": "description",
+        "type": "string"
+      },
+      {
+        "name": "id",
+        "type": "long"
+      },
+      {
+        "name": "author",
+        "type": "string"
+      }
+    ]
+  },
+  {
+    "namespace": "python.serialization.benchmark",
+    "type": "record",
+    "name": "NumericArrayObjectMsg",
+    "fields": [
+      {
+        "name": "information",
+        "type": "python.serialization.benchmark.InformationMsg"
+      },
+      {
+        "name": "x",
+        "type": "python.serialization.benchmark.NumPyMsg"
+      },
+      {
+        "name": "y",
+        "type": "python.serialization.benchmark.NumPyMsg"
+      },
+      {
+        "name": "z",
+        "type": "python.serialization.benchmark.NumPyMsg"
+      },
+      {
+        "name": "values",
+        "type": "python.serialization.benchmark.NumPyMsg"
+      }
+    ]
+  },
+  {
+    "namespace": "python.serialization.benchmark",
+    "type": "record",
+    "name": "TextObjectMsg",
+    "fields": [
+      {
+        "name": "information",
+        "type": "python.serialization.benchmark.InformationMsg"
+      },
+      {
+        "name": "abstract",
+        "type": "string"
+      },
+      {
+        "name": "text",
+        "type": "string"
+      },
+      {
+        "name": "appendix",
+        "type": "string"
+      }
+    ]
+  }
+]

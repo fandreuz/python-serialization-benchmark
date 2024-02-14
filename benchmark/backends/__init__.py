@@ -1,3 +1,4 @@
+from .bavro import AvroBackend  # noqa: F401
 from .bjson import JsonBackend  # noqa: F401
 from .borjson import OrjsonBackend  # noqa: F401
 from .bpickle4 import Pickle4Backend  # noqa: F401
