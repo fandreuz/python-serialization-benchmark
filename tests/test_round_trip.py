@@ -1,7 +1,9 @@
+import importlib
+import inspect
+
 import numpy as np
 import pytest
 
-from benchmark.backends import *
 from benchmark.base import Backend
 from benchmark.cases import Information, NumericArrayObject, TextObject
 
@@ -12,6 +14,13 @@ values = np.random.rand(10)
 
 info = Information("Test", "My test", 0, "fandreuz@cern.ch")
 
+backends = (
+    cls
+    for _, cls in inspect.getmembers(
+        importlib.import_module("benchmark.backends"), inspect.isclass
+    )
+)
+
 
 @pytest.mark.parametrize(
     "value",
@@ -20,18 +29,7 @@ info = Information("Test", "My test", 0, "fandreuz@cern.ch")
         TextObject(info, "My abstract", "Lorem ipsum", "Appendix something"),
     ),
 )
-@pytest.mark.parametrize(
-    "backend",
-    (
-        AvroBackend,
-        JsonBackend,
-        OrjsonBackend,
-        Pickle4Backend,
-        Pickle5Backend,
-        ProtobufBackend,
-        RapidjsonBackend,
-    ),
-)
+@pytest.mark.parametrize("backend", backends)
 def test_round_trip(value, backend: Backend):
     result = backend.deserialize(backend.serialize(value), type(value))
 
