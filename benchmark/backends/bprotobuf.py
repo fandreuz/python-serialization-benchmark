@@ -45,7 +45,6 @@ class ProtobufBackend(Backend[bytes]):
         msg.information.description = obj.information.description
         msg.information.id = obj.information.id
         msg.information.author = obj.information.author
-        msg.information.generated_at.FromDatetime(obj.information.generated_at)
 
         return msg.SerializeToString()
 
@@ -64,7 +63,6 @@ class ProtobufBackend(Backend[bytes]):
             description=msg.information.description,
             id=msg.information.id,
             author=msg.information.author,
-            generated_at=msg.information.generated_at.ToDatetime(),
         )
 
         if target_type == NumericArrayObject:

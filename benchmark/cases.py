@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from datetime import datetime
 
 import numpy as np
 
@@ -10,7 +9,6 @@ class Information:
     description: str
     id: int
     author: str
-    generated_at: datetime
 
 
 @dataclass(frozen=True)

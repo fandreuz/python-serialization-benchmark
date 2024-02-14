@@ -1,7 +1,5 @@
 syntax = "proto3";
 
-import "google/protobuf/timestamp.proto";
-
 message NumPyMsg {
     bytes array = 1;
     string dtype = 2;
@@ -12,7 +10,6 @@ message InformationMsg {
     string description = 2;
     int64 id = 3;
     string author = 4;
-    google.protobuf.Timestamp generated_at = 5;
 }
 
 message NumericArrayObjectMsg {
