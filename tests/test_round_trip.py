@@ -3,7 +3,7 @@ import pytest
 
 from benchmark.backends import *
 from benchmark.base import Backend
-from benchmark.cases import Information, NumericArrayObject
+from benchmark.cases import Information, NumericArrayObject, TextObject
 
 x = np.linspace(0, 1, 10)
 y = np.linspace(-1, 1, 10)
@@ -13,7 +13,13 @@ values = np.random.rand(10)
 info = Information("Test", "My test", 0, "fandreuz@cern.ch")
 
 
-@pytest.mark.parametrize("value", (NumericArrayObject(info, x, y, z, values),))
+@pytest.mark.parametrize(
+    "value",
+    (
+        NumericArrayObject(info, x, y, z, values),
+        TextObject(info, "My abstract", "Lorem ipsum", "Appendix something"),
+    ),
+)
 @pytest.mark.parametrize(
     "backend",
     (
