@@ -77,5 +77,5 @@ class ProtobufBackend(Backend[bytes]):
             information=information,
             abstract=msg.abstract,
             text=msg.text,
-            appendix=msg.abstract,
+            appendix=msg.appendix,
         )
