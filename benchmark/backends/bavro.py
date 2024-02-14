@@ -9,7 +9,7 @@ import avro.schema
 import numpy as np
 
 from benchmark.base import Backend
-from benchmark.cases import NumericArrayObject, TextObject
+from benchmark.cases import Information, NumericArrayObject, TextObject
 
 from .utils import numpy_array_as_bytes_and_dtype
 
@@ -27,12 +27,17 @@ def _prepare_serializable_dict(dc: dict[str, object]) -> dict[str, object]:
     return serializable_dc
 
 
-def _handle_numpy_fields(dc: dict[str, object]) -> dict[str, object]:
+def _handle_fields(dc: dict[str, object]) -> dict[str, object]:
     deserialized_dc = {}
     for key, value in dc.items():
-        if isinstance(value, dict) and "dtype" in value:
-            dtype = np.lib.format.descr_to_dtype(value["dtype"])
-            value = np.frombuffer(value["array"], dtype=dtype)
+        if isinstance(value, dict):
+            if "dtype" in value:
+                dtype = np.lib.format.descr_to_dtype(value["dtype"])
+                value = np.frombuffer(value["array"], dtype=dtype)
+            elif "author" in value:
+                value = Information(**value)
+            else:
+                raise ValueError(f"Unexpected dict: {value}")
         deserialized_dc[key] = value
     return deserialized_dc
 
@@ -53,4 +58,4 @@ class AvroBackend(Backend[bytes]):
         decoder = avro.io.BinaryDecoder(bytes_reader)
         reader = avro.io.DatumReader(schema)
         dc = reader.read(decoder)
-        return target_type(**_handle_numpy_fields(dc))
+        return target_type(**_handle_fields(dc))

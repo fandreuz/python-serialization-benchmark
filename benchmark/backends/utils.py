@@ -4,6 +4,8 @@ from dataclasses import dataclass
 
 import numpy as np
 
+from benchmark.cases import Information
+
 
 def as_serializable_dict(dc: dict[str, object]) -> dict[str, object]:
     serializable_dc = {}
@@ -14,11 +16,13 @@ def as_serializable_dict(dc: dict[str, object]) -> dict[str, object]:
     return serializable_dc
 
 
-def handle_numpy_fields(dc: dict[str, object]) -> dict[str, object]:
+def handle_fields(dc: dict[str, object]) -> dict[str, object]:
     deserialized_dc = {}
     for key, value in dc.items():
         if isinstance(value, (list, tuple)):
             value = np.array(value)
+        elif isinstance(value, dict) and "author" in value:
+            value = Information(**value)
         deserialized_dc[key] = value
     return deserialized_dc
 

@@ -8,7 +8,7 @@ from orjson import dumps, loads
 from benchmark.base import Backend
 from benchmark.cases import NumericArrayObject, TextObject
 
-from .utils import as_serializable_dict, handle_numpy_fields
+from .utils import as_serializable_dict, handle_fields
 
 
 class OrjsonBackend(Backend[bytes]):
@@ -22,4 +22,4 @@ class OrjsonBackend(Backend[bytes]):
         cls, serialized: bytes, target_type: Type[TextObject | NumericArrayObject]
     ) -> TextObject | NumericArrayObject:
         dc = loads(serialized)
-        return target_type(**handle_numpy_fields(dc))
+        return target_type(**handle_fields(dc))
