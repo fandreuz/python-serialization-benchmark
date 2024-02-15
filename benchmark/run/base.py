@@ -44,8 +44,8 @@ def _measure(
         d = backend.deserialize(s, target_type)  # noqa: F841
         end = time.time_ns()
 
-        serialization_times[i] = middle - start
-        deserialization_times[i] = end - middle
+        serialization_times[i] = (middle - start) / 1e6
+        deserialization_times[i] = (end - middle) / 1e6
 
     return BackendResult(backend, serialization_times, deserialization_times)
 
