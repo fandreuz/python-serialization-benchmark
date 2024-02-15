@@ -77,7 +77,7 @@ def pretty_print(results: tuple[BackendResult]):
         )
     )
 
-    print("Deerialization")
+    print("Deserialization")
     print(",".join(result.backend.__name__ for result in results_sorted))
     print(
         ",".join(
