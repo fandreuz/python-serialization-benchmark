@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import sys
 import time
 from dataclasses import dataclass
@@ -28,7 +29,18 @@ class BackendResult:
 
 
 def _acquire_config() -> Config:
-    return Config(int(sys.argv[1]), int(sys.argv[2]))
+    data_size, benchmark_iterations = None, None
+    if len(sys.argv) == 1:
+        data_size = os.environ.get("BENCHMARK_DATA_SIZE")
+        benchmark_iterations = os.environ.get("BENCHMARK_ITERATIONS")
+    elif len(sys.argv) == 3:
+        data_size = sys.argv[1]
+        benchmark_iterations = sys.argv[2]
+
+    if data_size is None or benchmark_iterations is None:
+        raise ValueError("Benchmark parameters were not specified")
+
+    return Config(int(data_size), int(benchmark_iterations))
 
 
 def _measure(

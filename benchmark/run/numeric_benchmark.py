@@ -1,7 +1,7 @@
 import numpy as np
 
 from benchmark.cases import Information, NumericArrayObject
-from benchmark.run.base import run_backends, pretty_print
+from benchmark.run.base import pretty_print, run_backends
 
 
 def generate_obj(size):

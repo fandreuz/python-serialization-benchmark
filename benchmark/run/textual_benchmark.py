@@ -1,8 +1,8 @@
-from benchmark.cases import Information, TextObject
-from benchmark.run.base import run_backends, pretty_print
-
 import random
 import string
+
+from benchmark.cases import Information, TextObject
+from benchmark.run.base import pretty_print, run_backends
 
 
 def generate_obj(size):
