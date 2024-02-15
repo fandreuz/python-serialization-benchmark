@@ -3,29 +3,16 @@ from __future__ import annotations
 import os
 import sys
 import time
-from dataclasses import dataclass
 from typing import Callable, Type
 
 import numpy as np
 
 from benchmark.base import Backend
 from benchmark.cases import NumericArrayObject, TextObject
+from benchmark.run.aggregations import aggregations
+from benchmark.run.model import BackendResult, Config
+from benchmark.run.pretty_printing import pretty_printings
 from benchmark.utils import get_all_backends
-
-
-@dataclass(frozen=True)
-class Config:
-    # Size of the relevant data (e.g. array length)
-    size: int
-    # Number of times the experiment shall be repeated
-    count: int
-
-
-@dataclass(frozen=True)
-class BackendResult:
-    backend: Type[Backend]
-    serialization_times_ns: np.ndarray
-    deserialization_times_ns: np.ndarray
 
 
 def _acquire_config() -> Config:
@@ -80,19 +67,7 @@ def pretty_print(results: tuple[BackendResult]):
     results_sorted = sorted(results, key=lambda result: str(result.backend))
     del results
 
-    # Ready for LaTeX ;)
-    print("Serialization")
-    print(",".join(result.backend.__name__ for result in results_sorted))
-    print(
-        ",".join(
-            str(np.mean(result.serialization_times_ns)) for result in results_sorted
-        )
-    )
+    aggregation = aggregations.get(os.environ.get("BENCHMARK_AGGREGATION", "mean"))
+    pp = pretty_printings.get(os.environ.get("BENCHMARK_PP", "csv"))
 
-    print("Deserialization")
-    print(",".join(result.backend.__name__ for result in results_sorted))
-    print(
-        ",".join(
-            str(np.mean(result.deserialization_times_ns)) for result in results_sorted
-        )
-    )
+    pp(results_sorted, aggregation)
