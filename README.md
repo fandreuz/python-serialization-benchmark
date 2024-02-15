@@ -18,15 +18,9 @@ A simple serialization benchmark for textual data and NumPy arrays.
 podman run --interactive --tty --rm \
 	-v .:/home \
 	-w /home \
-        --env BENCHMARK_DATA_SIZE=$SIZE \
-        --env BENCHMARK_ITERATIONS=$COUNT \
+        --env BENCHMARK_DATA_SIZE=$SIZE \    # data size (i.e. array length)
+        --env BENCHMARK_ITERATIONS=$COUNT \  # number of measurements
+        --env BENCHMARK_TYPE=numeric \       # or 'textual'
 	python:$PY_VERSION \
-	sh -c "python -m pip install . ;
-	       python -m pip install grpcio-tools ;
-	       mkdir benchmark/backends/generated ;
-	       python -m grpc_tools.protoc \
-	            -I=benchmark/resources \
-	            --python_out=benchmark/backends/generated/ \
-	            benchmark/resources/message.proto ;
-	       python -m benchmark.run.numeric_benchmark"
+	./run_benchmark.sh
 ```
