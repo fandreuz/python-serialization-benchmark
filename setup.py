@@ -8,5 +8,12 @@ setup(
     author_email="fandreuz@cern.ch",
     description="Simple serialization benchmark",
     packages=find_packages(),
-    install_requires=["numpy", "orjson", "python-rapidjson", "protobuf", "avro"],
+    install_requires=[
+        "numpy",
+        "orjson",
+        "python-rapidjson",
+        "protobuf",
+        "avro",
+        "typing_extensions;python_version<'3.10'",
+    ],
 )

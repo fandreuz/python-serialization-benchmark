@@ -1,7 +1,13 @@
 from __future__ import annotations
 
+import sys
 from functools import partial
-from typing import Callable, TypeAlias, cast
+from typing import Callable, cast
+
+if sys.version_info >= (3, 10):
+    from typing import TypeAlias
+else:
+    from typing_extensions import TypeAlias
 
 import numpy as np
 

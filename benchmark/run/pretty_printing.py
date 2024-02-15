@@ -1,6 +1,12 @@
 from __future__ import annotations
 
-from typing import Callable, Sequence, TypeAlias, cast
+import sys
+from typing import Callable, Sequence, cast
+
+if sys.version_info >= (3, 10):
+    from typing import TypeAlias
+else:
+    from typing_extensions import TypeAlias
 
 from benchmark.run.aggregations import Aggregation
 from benchmark.run.model import BackendResult
