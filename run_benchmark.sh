@@ -2,7 +2,7 @@ set -uex
 
 python -m pip install .
 python -m pip install grpcio-tools
-mkdir benchmark/backends/generated
+mkdir --parents benchmark/backends/generated
 python -m grpc_tools.protoc \
        -I=benchmark/resources \
        --python_out=benchmark/backends/generated/ \
