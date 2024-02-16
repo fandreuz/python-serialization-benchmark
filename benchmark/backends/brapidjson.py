@@ -23,3 +23,7 @@ class RapidjsonBackend(Backend[bytes]):
     ) -> TextObject | NumericArrayObject:
         dc = loads(serialized)
         return target_type(**handle_fields(dc))
+
+    @classmethod
+    def label(cls) -> str:
+        return "RapidJSON"

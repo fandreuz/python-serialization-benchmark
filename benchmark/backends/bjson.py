@@ -22,3 +22,7 @@ class JsonBackend(Backend[str]):
     ) -> TextObject | NumericArrayObject:
         dc = loads(serialized)
         return target_type(**handle_fields(dc))
+
+    @classmethod
+    def label(cls) -> str:
+        return "Json"

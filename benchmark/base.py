@@ -20,3 +20,8 @@ class Backend(Generic[S]):
         cls, serialized: S, target_type: Type[TextObject | NumericArrayObject]
     ) -> TextObject | NumericArrayObject:
         pass
+
+    @classmethod
+    @abc.abstractmethod
+    def label(cls) -> str:
+        pass

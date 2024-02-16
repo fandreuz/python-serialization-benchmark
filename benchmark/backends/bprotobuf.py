@@ -79,3 +79,7 @@ class ProtobufBackend(Backend[bytes]):
             text=msg.text,
             appendix=msg.appendix,
         )
+
+    @classmethod
+    def label(cls) -> str:
+        return "Protobuf"

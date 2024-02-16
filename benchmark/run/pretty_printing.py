@@ -15,7 +15,7 @@ PrettyPrinting: TypeAlias = Callable[[Sequence[BackendResult], Aggregation], Non
 
 
 def _print_backends(results: Sequence[BackendResult]):
-    print(",".join(result.backend.__name__ for result in results))
+    print(",".join(result.backend.label() for result in results))
 
 
 def _csv(results: Sequence[BackendResult], aggregation: Aggregation):

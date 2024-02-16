@@ -17,3 +17,7 @@ class Pickle5Backend(Backend[bytes]):
         cls, serialized: bytes, target_type: Type[TextObject | NumericArrayObject]
     ) -> TextObject | NumericArrayObject:
         return loads(serialized)
+
+    @classmethod
+    def label(cls) -> str:
+        return "Pickle5"

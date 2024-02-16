@@ -59,3 +59,7 @@ class AvroBackend(Backend[bytes]):
         reader = avro.io.DatumReader(schema)
         dc = reader.read(decoder)
         return target_type(**_handle_fields(dc))
+
+    @classmethod
+    def label(cls) -> str:
+        return "Avro"
