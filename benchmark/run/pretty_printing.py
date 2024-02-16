@@ -38,7 +38,7 @@ def _pgfplot_histogram(results: Sequence[BackendResult], aggregation: Aggregatio
     print("Serialization")
     print(
         " ".join(
-            f"({result.backend.__name__},{aggregation(result.serialization_times_ns)})"
+            f"({result.backend.label()},{aggregation(result.serialization_times_ns)})"
             for result in results
         )
     )
@@ -46,7 +46,7 @@ def _pgfplot_histogram(results: Sequence[BackendResult], aggregation: Aggregatio
     print("Deserialization")
     print(
         " ".join(
-            f"({result.backend.__name__},{aggregation(result.deserialization_times_ns)})"
+            f"({result.backend.label()},{aggregation(result.deserialization_times_ns)})"
             for result in results
         )
     )
