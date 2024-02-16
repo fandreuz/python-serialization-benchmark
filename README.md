@@ -1,6 +1,7 @@
 # Python serialization benchmark
 
-A simple serialization benchmark for textual data and NumPy arrays.
+A simple serialization benchmark for textual data and NumPy arrays. Results
+are obtained using `time.time_ns()`, and they are printed in nanoseconds.
 
 ## Libraries
 
